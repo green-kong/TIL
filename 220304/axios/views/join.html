@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="module" src="/idCheck.js"></script>
+  </head>
+  <body>
+    <form action="/join" method="post" id="join">
+      <ul>
+        <li>
+          아이디<input type="text" id="userid" name="userid" /><button
+            type="button"
+            id="id_chk_btn"
+          >
+            중복체크
+          </button>
+        </li>
+        <span id="id_chk_rst"></span>
+        <li>비번<input type="text" id="userpw" name="userpw" /></li>
+        <li>이름<input type="text" id="username" name="username" /></li>
+      </ul>
+      <button type="submit">회원가입</button>
+    </form>
+  </body>
+</html>

@@ -7,9 +7,9 @@ let idChkPass = false;
 const checkSameId = async () => {
   const userid = document.querySelector('#userid').value;
   const url = '/join/idCheck';
-  const opt = { userid };
+  const body = { userid };
 
-  const response = await axios.post(url, opt);
+  const response = await axios.post(url, body);
   const data = response.data;
   if (data) {
     idChkRst.innerHTML = ' 사용가능한 아이디입니다.';

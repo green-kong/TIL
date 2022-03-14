@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="./index.js" defer></script>
+    <style>
+      .board_subject {
+        font-size: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>템플릿 테스트!</h1>
+    <div id="content">
+      <ul id="board_list"></ul>
+    </div>
+    <button id="board_list_btn">불러오기</button>
+  </body>
+</html>
+
+<template id="posting">
+  <li>
+    <ul>
+      <li class="board_subject">제목 : {subject}</li>
+      <li>글쓴이 : {author}</li>
+      <li>날짜 : {date}</li>
+    </ul>
+  </li>
+</template>

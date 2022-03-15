@@ -15,5 +15,3 @@
 4. 랜더할 html 내의 img 태그 scr 속성에 위의 주소 넣어주기
 
 자세한 내용은 [블로그]()에
-slkefsle
-gsefjs

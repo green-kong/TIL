@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <form
+      method="post"
+      action="/upload"
+      enctype="multipart/form-data"
+      id="upload_frm"
+    >
+      <input type="text" name="subject" />
+      <input type="file" name="imgUpload" />
+      <button type="submit">전송</button>
+    </form>
+    <script>
+      const uploadFrm = document.querySelector('#upload_frm');
+
+      uploadFrm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const { subject, imgUpload } = e.target;
+
+        console.log(imgUpload.files[0]);
+        const formData = new FormData();
+        formData.append('imgUpload', imgUpload.files[0]);
+        formData.append('subject', subject.value);
+
+        axios.post('/upload', formData);
+      });
+    </script>
+  </body>
+</html>

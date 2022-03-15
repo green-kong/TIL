@@ -14,12 +14,11 @@ const checkSameId = async () => {
   if (data) {
     idChkRst.innerHTML = ' 사용가능한 아이디입니다.';
     idChkRst.style.color = 'green';
-    idChkPass = true;
   } else {
     idChkRst.innerHTML = ' 중복된 아이디입니다.';
     idChkRst.style.color = 'red';
-    idChkPass = false;
   }
+  idChkPass = data;
 };
 
 idCheck.addEventListener('click', checkSameId);

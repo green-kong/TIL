@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="/board/list.js" defer></script>
+    <title>Document</title>
+    <style>
+      #board {
+        width: 100%;
+      }
+
+      #board > tbody td,
+      #board > tobody th {
+        padding: 7px;
+        border-bottom: 1px solid #eee;
+      }
+      a {
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <table id="board">
+      <thead>
+        <tr>
+          <td>번호</td>
+          <td>제목</td>
+          <td>작성자</td>
+          <td>작성일</td>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <a href="/board/write">글쓰기</a>
+    <div>
+      <a onclick="movePrevPage()">&lt;</a>
+      <span id="pagenation">
+        <a onclick="movePage(1)">1</a>
+        <a onclick="movePage(2)">2</a>
+        <a onclick="movePage(3)">3</a>
+        <a onclick="movePage(4)">4</a>
+        <a onclick="movePage(5)">5</a>
+        <a onclick="movePage(6)">6</a>
+        <a onclick="movePage(7)">7</a>
+        <a onclick="movePage(8)">8</a>
+        <a onclick="movePage(9)">9</a>
+        <a onclick="movePage(10)">10</a>
+      </span>
+      <a onclick="moveNextPage()">&gt;</a>
+    </div>
+  </body>
+</html>
+
+<template id="board_row">
+  <tr>
+    <td>{idx}</td>
+    <td>
+      <a href="/board/view?idx={{posting.idx}}"> {subject}</a>
+    </td>
+    <td>{nickname}</td>
+    <td>{date}</td>
+  </tr>
+</template>
+
+<template id="page_btn_template">
+  <a onclick="movePage({page})">{page}</a>
+</template>

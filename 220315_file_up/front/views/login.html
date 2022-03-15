@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <form action="/" method="post" id="login_form">
+      <ul>
+        <li>
+          <input type="text" id="userid" name="userid" placeholder="id" />
+        </li>
+        <li>
+          <input type="text" id="userpw" name="userpw" placeholder="pw" />
+        </li>
+        <button type="submit">로그인</button>
+      </ul>
+    </form>
+    <script>
+      const loginForm = document.querySelector('#login_form');
+
+      const signIn = async (e) => {
+        e.preventDefault();
+        const userid = document.querySelector('#userid').value;
+        const userpw = document.querySelector('#userpw').value;
+        const url = 'http://localhost:4001/api/user/login';
+        const body = { userid, userpw };
+        const header = { withCredentials: true };
+        try {
+          const response = await axios.post(url, body, header);
+          console.log(response);
+          if (response.data.result === 'fail') {
+            throw new Error('존재하지 않는 계정입니다.');
+          }
+          alert('로그인 되었습니다');
+          location.href = '/';
+        } catch (err) {
+          alert(`${err.message}`);
+        }
+      };
+
+      loginForm.addEventListener('submit', signIn);
+    </script>
+  </body>
+</html>

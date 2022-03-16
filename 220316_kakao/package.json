@@ -1,0 +1,25 @@
+{
+  "name": "220316_kakao",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.26.1",
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "jsonwebtoken": "^8.5.1",
+    "nunjucks": "^3.2.3",
+    "qs": "^6.10.3"
+  },
+  "devDependencies": {
+    "chokidar": "^3.5.3"
+  }
+}

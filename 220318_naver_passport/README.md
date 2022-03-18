@@ -1,4 +1,4 @@
-# 220316 passport-naver-v2 이용한 jwt 로그인 방식
+# 220318 passport-naver-v2 이용한 jwt 로그인 방식
 
 - naver에서 만든 `passport-naver` 도 있지만, 몇년째 업데이트가 안됨(방치된듯..?)
 - 그래서 개인이만든 `passport-naver-v2`를 사용함

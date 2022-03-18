@@ -7,20 +7,20 @@ const issuer = process.env.JWT_ISSUER;
 
 const options = { expiresIn, issuer };
 
-// 토큰 만들기 
+// 토큰 만들기
 // jwt.sign(payload,secretKey,options)
-function makeJwt(payload){ 
-	return jwt.sign(payload, secretKey, options);
+function makeJwt(payload) {
+  return jwt.sign(payload, secretKey, options);
 }
 
-// 토큰 디코딩 
+// 토큰 디코딩
 // jwt.verify(token,secretKey, (err,result)=>{err핸들링})
 
-function decodePayload(token){
-	return jwt.verify(token, secretKey);
+function decodePayload(token) {
+  return jwt.verify(token, secretKey);
 }
 
 module.exports = {
-	makeJwt,
-	decodePayload
+  makeJwt,
+  decodePayload,
 };

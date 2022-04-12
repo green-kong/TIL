@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@17/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      class Content extends React.Component {
+        render() {
+          return (
+            <tr>
+              <td>1</td>
+              <td>1</td>
+              <td>1</td>
+              <td>1</td>
+              <td>1</td>
+            </tr>
+          );
+        }
+      }
+
+      class Subject extends React.Component {
+        render() {
+          return (
+            <tr>
+              <th>번호</th>
+              <th>제목</th>
+              <th>작성자</th>
+              <th>작성일</th>
+              <th>조회수</th>
+            </tr>
+          );
+        }
+      }
+
+      class Tail extends React.Component {
+        render() {
+          return (
+            <React.Fragment>
+              <td>2</td>
+              <td>2</td>
+              <td>2</td>
+              <td>2</td>
+              <td>2</td>
+            </React.Fragment>
+          );
+        }
+      }
+
+      class Tables extends React.Component {
+        render() {
+          return (
+            <table>
+              <thead>
+                <Subject />
+              </thead>
+              <tbody>
+                <Content />
+                <Content />
+                <Content />
+                <Content />
+                <tr>
+                  <Tail />
+                </tr>
+              </tbody>
+            </table>
+          );
+        }
+      }
+
+      class App extends React.Component {
+        render() {
+          return (
+            <div>
+              <Tables />
+            </div>
+          );
+        }
+      }
+      const root = document.querySelector('#root');
+
+      ReactDOM.render(<App />, root);
+    </script>
+  </body>
+</html>

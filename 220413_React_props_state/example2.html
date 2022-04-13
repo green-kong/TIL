@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@17/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      class C extends React.Component {
+        render() {
+          console.log('from B', this.props);
+          const { text } = this.props;
+          return <div>Hello, C:{text}</div>;
+        }
+      }
+
+      class B extends React.Component {
+        render() {
+          console.log('from A', this.props);
+          const { value } = this.props;
+          return <C text={value} />;
+        }
+      }
+
+      class A extends React.Component {
+        render() {
+          console.log('from App', this.props);
+          return <B value={this.props.name} />;
+        }
+      }
+
+      class App extends React.Component {
+        render() {
+          return (
+            <div>
+              <A name={'kong'} />
+            </div>
+          );
+        }
+      }
+
+      const root = document.querySelector('#root');
+      ReactDOM.render(<App />, root);
+    </script>
+  </body>
+</html>

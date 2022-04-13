@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@17/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      class Login extends React.Component {
+        // constructor 는 생략 가능함
+
+        // 변수명(state) 바뀌면 절대 안됨
+        state = {
+          isLogin: false,
+        };
+
+        tst = () => {
+          this.setState({
+            ...this.state,
+            isLogin: !this.state.isLogin,
+          });
+        };
+
+        test() {
+          this.setState({
+            ...this.state,
+            isLogin: !this.state.isLogin,
+          });
+        }
+
+        render() {
+          return (
+            <button onClick={this.tst}>
+              {this.state.isLogin ? '로그아웃' : '로그인'}
+            </button>
+          );
+        }
+      }
+
+      class App extends React.Component {
+        render() {
+          return (
+            <div>
+              <Login />
+            </div>
+          );
+        }
+      }
+
+      const root = document.querySelector('#root');
+      ReactDOM.render(<App />, root);
+    </script>
+  </body>
+</html>

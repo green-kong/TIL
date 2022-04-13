@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@17/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      class Counter extends React.Component {
+        state = { number: 0 };
+
+        plusCounter = () => {
+          this.setState({ ...this.state, number: this.state.number + 1 });
+        };
+
+        minusCounter = () => {
+          if (this.state.number === 0) {
+            return;
+          }
+          this.setState({ ...this.state, number: this.state.number - 1 });
+        };
+
+        render() {
+          return (
+            <div>
+              <button onClick={this.plusCounter}>+</button>
+              <span>{this.state.number}</span>
+              <button onClick={this.minusCounter}>-</button>
+            </div>
+          );
+        }
+      }
+
+      class App extends React.Component {
+        render() {
+          return <Counter />;
+        }
+      }
+
+      const root = document.querySelector('#root');
+      ReactDOM.render(<App />, root);
+    </script>
+  </body>
+</html>

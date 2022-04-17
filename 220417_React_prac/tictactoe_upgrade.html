@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        font: 14px 'Century Gothic', Futura, sans-serif;
+        margin: 20px;
+      }
+
+      ol,
+      ul {
+        padding-left: 30px;
+      }
+
+      .board-row:after {
+        clear: both;
+        content: '';
+        display: table;
+      }
+
+      .status {
+        margin-bottom: 10px;
+      }
+
+      .square {
+        background: #fff;
+        border: 1px solid #999;
+        float: left;
+        font-size: 24px;
+        font-weight: bold;
+        line-height: 34px;
+        height: 34px;
+        margin-right: -1px;
+        margin-top: -1px;
+        padding: 0;
+        text-align: center;
+        width: 34px;
+      }
+
+      .square.win {
+        background-color: rgb(176, 252, 176);
+      }
+
+      .square:focus {
+        outline: none;
+      }
+
+      .kbd-navigation .square:focus {
+        background: #ddd;
+      }
+
+      .game {
+        display: flex;
+        flex-direction: row;
+      }
+
+      .game-info {
+        margin-left: 20px;
+      }
+    </style>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@17/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      class Square extends React.Component {
+        render() {
+          const { winLine, idx } = this.props;
+          for (let i = 0; i < winLine.length; i++) {
+            if (idx === winLine[i]) {
+              return (
+                <button className="square win" onClick={this.props.onClick}>
+                  {this.props.value}
+                </button>
+              );
+            }
+          }
+          return (
+            <button className="square" onClick={this.props.onClick}>
+              {this.props.value}
+            </button>
+          );
+        }
+      }
+
+      class Board extends React.Component {
+        squareRender = (idx) => {
+          return (
+            <Square
+              onClick={() => {
+                this.props.onClick(idx);
+              }}
+              value={this.props.squares[idx]}
+              winLine={this.props.winLine}
+              idx={idx}
+              isClicked={this.props.isClicked}
+            />
+          );
+        };
+
+        render() {
+          return (
+            <div>
+              <div className="board-row">
+                {this.squareRender(0)}
+                {this.squareRender(1)}
+                {this.squareRender(2)}
+              </div>
+              <div className="board-row">
+                {this.squareRender(3)}
+                {this.squareRender(4)}
+                {this.squareRender(5)}
+              </div>
+              <div className="board-row">
+                {this.squareRender(6)}
+                {this.squareRender(7)}
+                {this.squareRender(8)}
+              </div>
+            </div>
+          );
+        }
+      }
+
+      class Game extends React.Component {
+        state = {
+          xIsNext: true,
+          isStart: false,
+          squares: Array(9).fill(null),
+          turn: 0,
+          history: [{ squares: Array(9).fill(null) }],
+          winCountO: 0,
+          winCountX: 0,
+          winLine: [],
+        };
+
+        gameStart = () => {
+          if (this.state.isStart) {
+            this.setState({
+              xIsNext: true,
+              isStart: false,
+              squares: Array(9).fill(null),
+              turn: 0,
+              history: [{ squares: Array(9).fill(null) }],
+              winLine: [],
+            });
+            return;
+          }
+
+          this.setState({ ...this.state, isStart: !this.state.isStart });
+        };
+
+        clickSquare = (i) => {
+          if (this.state.isStart) {
+            let newState = {
+              ...this.state,
+              xIsNext: !this.state.xIsNext,
+              turn: this.state.turn + 1,
+            };
+            newState.squares[i] = this.state.xIsNext ? 'X' : 'O';
+            newState.history[this.state.turn + 1] = {
+              squares: [...newState.squares],
+            };
+
+            const win = calculateWinner(this.state.squares);
+            if (win) {
+              const [winner, line] = win;
+              newState =
+                winner === 'X'
+                  ? { ...newState, winCountX: newState.winCountX + 1 }
+                  : {
+                      ...newState,
+                      winCountO: newState.winCountO + 1,
+                    };
+              newState = { ...newState, winLine: [...line] };
+            }
+            this.setState(newState);
+          }
+        };
+
+        clickUndo = () => {
+          if (this.state.turn === 0) {
+            return;
+          }
+
+          const preSquare = this.state.history[this.state.turn - 1].squares;
+          const newState = {
+            ...this.state,
+            turn: this.state.turn - 1,
+            squares: [...preSquare],
+            xIsNext: !this.state.xIsNext,
+          };
+
+          this.setState(newState);
+        };
+
+        render() {
+          const winner = calculateWinner(this.state.squares);
+          return (
+            <div>
+              <div className="status">
+                {winner
+                  ? `Winner is ${winner[0]}`
+                  : `Next turn is
+                ${this.state.xIsNext ? 'X' : 'O'}`}
+              </div>
+              <Board
+                onClick={(i) => {
+                  this.clickSquare(i);
+                }}
+                squares={this.state.squares}
+                winLine={this.state.winLine}
+                isClicked={this.state.isClicked}
+              />
+              <div>
+                {!this.state.isStart ? (
+                  <button onClick={this.gameStart}>Game Start</button>
+                ) : (
+                  <span>
+                    <button onClick={this.gameStart}>Restart</button>
+                    <button onClick={this.clickUndo}>Undo</button>
+                  </span>
+                )}
+              </div>
+              <div>
+                O {this.state.winCountO} vs {this.state.winCountX} X
+              </div>
+            </div>
+          );
+        }
+      }
+
+      const root = document.querySelector('#root');
+      ReactDOM.render(<Game />, root);
+
+      function calculateWinner(squares) {
+        const lines = [
+          [0, 1, 2],
+          [3, 4, 5],
+          [6, 7, 8],
+          [0, 3, 6],
+          [1, 4, 7],
+          [2, 5, 8],
+          [0, 4, 8],
+          [2, 4, 6],
+        ];
+        for (let i = 0; i < lines.length; i++) {
+          const [a, b, c] = lines[i];
+          if (
+            squares[a] &&
+            squares[a] === squares[b] &&
+            squares[a] === squares[c]
+          ) {
+            return [squares[a], lines[i]];
+          }
+        }
+        return null;
+      }
+    </script>
+  </body>
+</html>

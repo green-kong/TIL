@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@17/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      class Form extends React.Component {
+        changeHandler = (e) => {
+          const { value } = e.target;
+          this.props.change(value);
+        };
+
+        submitHandler = (e) => {
+          e.preventDefault();
+          console.log('??');
+        };
+
+        render() {
+          return (
+            <form onSubmit={this.submitHandler}>
+              내용 :{' '}
+              <input
+                type="text"
+                value={this.props.value}
+                onChange={this.changeHandler}
+              />
+              <input type="submit" value="확인" />
+            </form>
+          );
+        }
+      }
+
+      class Value extends React.Component {
+        render() {
+          return <h3>{this.props.value}</h3>;
+        }
+      }
+
+      class App extends React.Component {
+        state = { value: '' };
+
+        changeValue = (v) => {
+          this.setState({ ...this.state, value: v });
+        };
+
+        render() {
+          return (
+            <div>
+              <Form change={this.changeValue} value={this.state.value} />
+              <Value value={this.state.value} />
+            </div>
+          );
+        }
+      }
+
+      ReactDOM.render(<App />, root);
+    </script>
+  </body>
+</html>

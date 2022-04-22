@@ -12,6 +12,7 @@ class App extends Component {
         date: '2022-04-21',
       },
     ],
+    isUpdating: -1,
   };
 
   componentDidMount() {
@@ -52,12 +53,32 @@ class App extends Component {
     });
   };
 
+  clikcUdt = (udtIdx) => {
+    this.setState({
+      ...this.state,
+      isUpdating: udtIdx,
+    });
+  };
+
+  udtSubmit = (idx, value) => {
+    const newList = [...this.state.list];
+
+    newList[idx].content = value;
+    this.setState({ ...this.state, list: newList, isUpdating: -1 });
+  };
+
   render() {
     return (
       <>
         <Reply>
           <Input onSubmit={this.handleSubmit}></Input>
-          <List list={this.state.list} clickDel={this.clickDelBtn}></List>
+          <List
+            list={this.state.list}
+            clickDel={this.clickDelBtn}
+            clickUdt={this.clikcUdt}
+            updatingIdx={this.state.isUpdating}
+            udtSubmit={this.udtSubmit}
+          ></List>
         </Reply>
       </>
     );

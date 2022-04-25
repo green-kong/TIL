@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import Square from './square';
 
 export default class Game extends Component {
+  inputText = React.createRef();
   renderSquare = () => {
     const squareArr = [];
     for (let i = 0; i < this.props.try + 1; i++) {

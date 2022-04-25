@@ -110,11 +110,3 @@ export default class Square extends Component {
     );
   }
 }
-
-// const newValue = [...this.state.value];
-// newValue[i] = '';
-// newValue[i] = e.target.value;
-// this.setState({
-//   ...this.state,
-//   value: newValue,
-// });

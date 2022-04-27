@@ -1,0 +1,30 @@
+ul,
+li {
+  list-style: none;
+}
+
+.startBtn {
+  margin-top: 20px;
+  width: 100px;
+  height: 40px;
+  font-size: 16px;
+  outline: none;
+  box-shadow: none;
+  border: none;
+  color: dodgerblue;
+  border-radius: 5px;
+  border: 1px #444 solid;
+}
+
+.startBtn:hover {
+  background-color: dodgerblue;
+  color: #fff;
+}
+
+.rules {
+  width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

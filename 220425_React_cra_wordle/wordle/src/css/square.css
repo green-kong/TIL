@@ -1,0 +1,53 @@
+.square_row {
+  display: flex;
+  margin-bottom: 10px;
+  width: 350px;
+  justify-content: space-between;
+}
+
+.square {
+  width: 60px;
+  height: 60px;
+  border: 1px solid black;
+  box-sizing: border-box;
+  font-size: 45px;
+  text-align: center;
+  line-height: 60px;
+}
+
+.square.out {
+  width: 60px;
+  height: 60px;
+  border: 1px solid black;
+  box-sizing: border-box;
+  font-size: 45px;
+  text-align: center;
+  line-height: 60px;
+  background-color: lightgrey;
+}
+
+.square.strike {
+  width: 60px;
+  height: 60px;
+  border: 1px solid black;
+  box-sizing: border-box;
+  font-size: 45px;
+  text-align: center;
+  line-height: 60px;
+  background-color: greenyellow;
+}
+
+.square.ball {
+  width: 60px;
+  height: 60px;
+  border: 1px solid black;
+  box-sizing: border-box;
+  font-size: 45px;
+  text-align: center;
+  line-height: 60px;
+  background-color: rgb(245, 253, 131);
+}
+
+.submitBtn {
+  display: none;
+}

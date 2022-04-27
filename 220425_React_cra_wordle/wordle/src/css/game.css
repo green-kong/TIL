@@ -1,0 +1,22 @@
+.game {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.restart_btn {
+  width: 100px;
+  height: 40px;
+  font-size: 20px;
+  border: 1px #444 solid;
+  border-radius: 5px;
+  color: dodgerblue;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.restart_btn:hover {
+  color: #fff;
+  background-color: dodgerblue;
+}

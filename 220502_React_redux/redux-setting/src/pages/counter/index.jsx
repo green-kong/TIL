@@ -4,7 +4,10 @@ import { up, down } from '../../reducer';
 
 const Counter = () => {
   const dispatch = useDispatch();
-  const counter = useSelector((state) => state);
+  const counter = useSelector((state) => {
+    console.log(state);
+    return state.counter;
+  });
 
   const onUp = () => {
     dispatch(up());

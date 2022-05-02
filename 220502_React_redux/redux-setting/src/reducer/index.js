@@ -1,5 +1,7 @@
 const initialState = {
-  number: 0,
+  counter: {
+    number: 0,
+  },
 };
 
 const UP = 'COUNTER/UP';
@@ -12,9 +14,17 @@ const rootReducer = (state = initialState, action) => {
   const { type } = action;
   switch (type) {
     case UP:
+      const {
+        counter: { number },
+      } = state;
+
+      const counter = {
+        ...state.counter,
+        number: number + 1,
+      };
       return {
         ...state,
-        number: state.number + 1,
+        counter,
       };
 
     case DOWN:

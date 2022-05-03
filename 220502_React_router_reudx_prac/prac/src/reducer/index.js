@@ -1,25 +1,11 @@
-const initialState = {
-  number: 0,
-};
+import { combineReducers } from 'redux';
 
-const rootReducer = (state = initialState, action) => {
-  const { type } = action;
-  switch (type) {
-    case 'increase':
-      return {
-        ...state,
-        number: state.number + 1,
-      };
+import comment from './comment/commentReducer';
+import counter from './counter/counter';
 
-    case 'decrease':
-      return {
-        ...state,
-        number: state.number - 1,
-      };
-
-    default:
-      return state;
-  }
-};
+const rootReducer = combineReducers({
+  comment,
+  counter,
+});
 
 export default rootReducer;

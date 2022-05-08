@@ -2,6 +2,7 @@ import loginActions from './loginActions';
 
 const intialState = {
   isLogin: false,
+  user: null,
 };
 
 const login = (state = intialState, action) => {
@@ -9,6 +10,7 @@ const login = (state = intialState, action) => {
     case loginActions.LOGIN_SUCCESS:
       return {
         ...state,
+        user: action.payload,
         isLogin: true,
       };
     default:

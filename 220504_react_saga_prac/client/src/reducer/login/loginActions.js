@@ -9,8 +9,8 @@ class LoginActions {
     return { type: this.LOGIN_PENDING };
   }
 
-  loginSuccess() {
-    return { type: this.LOGIN_SUCCESS };
+  loginSuccess(payload) {
+    return { type: this.LOGIN_SUCCESS, payload };
   }
 
   loginFail() {

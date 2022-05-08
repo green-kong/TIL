@@ -1,7 +1,7 @@
 import useForm from '../hooks/useForm';
 import loginActions from '../reducer/login/loginActions';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 const Login = () => {
   const initialState = {
@@ -10,7 +10,6 @@ const Login = () => {
   };
   const [inputState, setInput] = useForm(initialState);
   const dispatch = useDispatch();
-  const isLogin = useSelector((state) => state.login.isLogin);
 
   const submitHandler = (e) => {
     e.preventDefault();
